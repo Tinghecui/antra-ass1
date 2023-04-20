@@ -1,0 +1,40 @@
+using System;
+using System.Collections.Generic;
+
+namespace SimpleListManager
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            List<string> itemList = new List<string>();
+
+            while (true)
+            {
+                Console.WriteLine("Enter command (+ item, - item, or -- to clear)):");
+                string userInput = Console.ReadLine();
+
+                if (userInput.StartsWith("+"))
+                {
+                    string itemToAdd = userInput.Substring(1).Trim();
+                    itemList.Add(itemToAdd);
+                }
+                else if (userInput.StartsWith("-"))
+                {
+                    string itemToRemove = userInput.Substring(1).Trim();
+                    itemList.Remove(itemToRemove);
+                }
+                else if (userInput == "--")
+                {
+                    itemList.Clear();
+                }
+
+                Console.WriteLine("Current list:");
+                foreach (string item in itemList)
+                {
+                    Console.WriteLine(item);
+                }
+            }
+        }
+    }
+}
