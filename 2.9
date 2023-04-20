@@ -1,0 +1,41 @@
+using System;
+using System.Text.RegularExpressions;
+
+namespace ReverseWordsInSentence
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Enter a sentence:");
+            string inputSentence = Console.ReadLine();
+
+            string[] separators = { ".", ",", ":", ";", "=", "(", ")", "&", "[", "]", "\"", "'", "\\", "/", "!", "?", " " };
+            string[] words = Regex.Split(inputSentence, @"(\.|\,|\:|\;|\=|\(|\)|\&|\[|\]|\""|\'|\\|\/|\!|\?|\s)");
+            Array.Reverse(words);
+
+            string result = "";
+            int wordIndex = 0;
+            int separatorIndex = 0;
+
+            for (int i = 0; i < inputSentence.Length;)
+            {
+                if (Array.IndexOf(separators, inputSentence[i].ToString()) != -1)
+                {
+                    result += inputSentence[i];
+                    separatorIndex++;
+                    i++;
+                }
+                else
+                {
+                    int wordLength = words[wordIndex].Length;
+                    result += words[wordIndex];
+                    i += wordLength;
+                    wordIndex++;
+                }
+            }
+
+            Console.WriteLine("Reversed words in the sentence: " + result);
+        }
+    }
+}
