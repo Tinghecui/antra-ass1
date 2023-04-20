@@ -1,0 +1,27 @@
+using System;
+
+namespace ReverseString
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Enter a string:");
+            string inputString = Console.ReadLine();
+
+            // Method 1: Convert the string to a char array, reverse it, and convert it back to a string.
+            char[] charArray = inputString.ToCharArray();
+            Array.Reverse(charArray);
+            string reversedString1 = new string(charArray);
+            Console.WriteLine("Reversed string using method 1: " + reversedString1);
+
+            // Method 2: Print the letters of the string in reverse order in a for-loop.
+            string reversedString2 = "";
+            for (int i = inputString.Length - 1; i >= 0; i--)
+            {
+                reversedString2 += inputString[i];
+            }
+            Console.WriteLine("Reversed string using method 2: " + reversedString2);
+        }
+    }
+}
