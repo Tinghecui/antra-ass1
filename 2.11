@@ -1,0 +1,34 @@
+using System;
+using System.Text.RegularExpressions;
+
+namespace ParseURL
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Enter a URL:");
+            string inputURL = Console.ReadLine();
+
+            string urlPattern = @"^(?:(?<protocol>\w+)://)?(?<server>[^/]+)(?:/(?<resource>.*))?$";
+            Regex urlRegex = new Regex(urlPattern);
+
+            Match match = urlRegex.Match(inputURL);
+
+            if (match.Success)
+            {
+                string protocol = match.Groups["protocol"].Value;
+                string server = match.Groups["server"].Value;
+                string resource = match.Groups["resource"].Value;
+
+                Console.WriteLine("[protocol] = \"{0}\"", protocol);
+                Console.WriteLine("[server] = \"{0}\"", server);
+                Console.WriteLine("[resource] = \"{0}\"", resource);
+            }
+            else
+            {
+                Console.WriteLine("Invalid URL.");
+            }
+        }
+    }
+}
