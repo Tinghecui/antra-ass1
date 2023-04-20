@@ -1,0 +1,50 @@
+using System;
+using System.Collections.Generic;
+
+namespace PrimeNumbersInRange
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] primes = FindPrimesInRange(1, 50);
+
+            Console.WriteLine("Prime numbers in the given range:");
+            foreach (int prime in primes)
+            {
+                Console.Write(prime + " ");
+            }
+        }
+
+        static int[] FindPrimesInRange(int startNum, int endNum)
+        {
+            List<int> primesList = new List<int>();
+
+            for (int num = startNum; num <= endNum; num++)
+            {
+                if (IsPrime(num))
+                {
+                    primesList.Add(num);
+                }
+            }
+
+            return primesList.ToArray();
+        }
+
+        static bool IsPrime(int num)
+        {
+            if (num <= 1) return false;
+            if (num == 2) return true;
+
+            for (int i = 2; i <= Math.Sqrt(num); i++)
+            {
+                if (num % i == 0)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+    }
+}
