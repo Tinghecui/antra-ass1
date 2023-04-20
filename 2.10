@@ -1,0 +1,48 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+
+namespace ExtractPalindromes
+{
+    class Program
+    {
+        static bool IsPalindrome(string word)
+        {
+            int left = 0;
+            int right = word.Length - 1;
+
+            while (left < right)
+            {
+                if (word[left] != word[right])
+                {
+                    return false;
+                }
+                left++;
+                right--;
+            }
+
+            return true;
+        }
+
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Enter a text:");
+            string inputText = Console.ReadLine();
+
+            string[] words = Regex.Split(inputText, @"\W+");
+            HashSet<string> palindromes = new HashSet<string>();
+
+            foreach (string word in words)
+            {
+                if (IsPalindrome(word) && word.Length > 0)
+                {
+                    palindromes.Add(word);
+                }
+            }
+
+            var sortedPalindromes = palindromes.OrderBy(p => p).ToList();
+            Console.WriteLine("Palindromes: " + string.Join(", ", sortedPalindromes));
+        }
+    }
+}
